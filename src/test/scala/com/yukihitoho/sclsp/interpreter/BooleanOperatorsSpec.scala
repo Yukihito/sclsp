@@ -2,7 +2,7 @@ package com.yukihitoho.sclsp.interpreter
 
 import com.yukihitoho.sclsp.evaluator.{BooleanValue, NumberValue, StringValue}
 import com.yukihitoho.sclsp.evaluator.EvaluationError.{InvalidArgumentType, InvalidNumberOfArguments}
-import com.yukihitoho.sclsp.interpreter.InterpretingError.EvaluationError
+import com.yukihitoho.sclsp.interpreter.InterpretationError.EvaluationError
 import org.scalatest._
 
 class BooleanOperatorsSpec extends FlatSpec with Matchers {

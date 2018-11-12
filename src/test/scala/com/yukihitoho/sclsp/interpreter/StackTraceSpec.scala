@@ -3,7 +3,7 @@ package com.yukihitoho.sclsp.interpreter
 import com.yukihitoho.sclsp.ast.Position
 import com.yukihitoho.sclsp.evaluator.{Call, CompoundProcedureValue, SymbolValue}
 import com.yukihitoho.sclsp.evaluator.EvaluationError.Exit
-import com.yukihitoho.sclsp.interpreter.InterpretingError.EvaluationError
+import com.yukihitoho.sclsp.interpreter.InterpretationError.EvaluationError
 import org.scalatest._
 
 class StackTraceSpec extends FlatSpec with Matchers{

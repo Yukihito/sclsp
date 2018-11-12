@@ -2,7 +2,7 @@ package com.yukihitoho.sclsp.interpreter
 
 import com.yukihitoho.sclsp.evaluator.EvaluationError.InvalidNumberOfArguments
 import com.yukihitoho.sclsp.evaluator.{BooleanValue, NilValue, NumberValue, StringValue}
-import com.yukihitoho.sclsp.interpreter.InterpretingError.EvaluationError
+import com.yukihitoho.sclsp.interpreter.InterpretationError.EvaluationError
 import com.yukihitoho.sclsp.modules.prelude.{Addition, Lambda}
 import org.scalatest._
 

@@ -2,7 +2,7 @@ package com.yukihitoho.sclsp.interpreter
 
 import com.yukihitoho.sclsp.evaluator.BooleanValue
 import com.yukihitoho.sclsp.evaluator.EvaluationError.InvalidNumberOfArguments
-import com.yukihitoho.sclsp.interpreter.InterpretingError.EvaluationError
+import com.yukihitoho.sclsp.interpreter.InterpretationError.EvaluationError
 import org.scalatest._
 
 class `Eq?OperatorSpec` extends FlatSpec with Matchers {
