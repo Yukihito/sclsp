@@ -13,9 +13,9 @@ trait Interpreter {
   protected val environmentFactory: EnvironmentFactory
   private lazy val environment: Environment = environmentFactory.create(None).store(modules)
 
-  def interpret(src: String): Either[InterpretationError, Value] =
+  def interpret(src: String, fileName: String = "<console>"): Either[InterpretationError, Value] =
     for {
-      ast <- parser.parseToNode(src).right.map(_.toAST).left.map(ParsingError)
+      ast <- parser.parseToNode(src, fileName: String).right.map(_.toAST).left.map(ParsingError)
       value <- evaluator.evaluate(ast, environment).left.map(EvaluationError)
     } yield value
 }
