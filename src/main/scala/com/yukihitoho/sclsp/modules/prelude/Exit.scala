@@ -4,7 +4,7 @@ import com.yukihitoho.sclsp.evaluator.EvaluationError.InvalidArgumentType
 import com.yukihitoho.sclsp.evaluator._
 
 object Exit extends VariableFactory {
-  private val variable = BuiltinVariable("exit", new UnaryOperatorValue {
+  private val variable = BuiltinVariable(new UnaryOperatorValue {
     override protected def call(argument: Value, stackTrace: StackTrace): Either[EvaluationError, Value] =
       for {
         _ <- argument match {
@@ -12,6 +12,8 @@ object Exit extends VariableFactory {
           case invalidTypeValue => Left(InvalidArgumentType("number", invalidTypeValue, stackTrace.toList))
         }
       } yield NilValue
+
+    override def builtinSymbol: String = "exit"
   })
 
   override def create(): Variable = variable

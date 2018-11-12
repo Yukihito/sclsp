@@ -4,9 +4,6 @@ import com.yukihitoho.sclsp.evaluator.{Module, VariableFactory}
 
 object Prelude extends Module {
   override def variableFactories: Seq[VariableFactory] = Seq(
-    Nil,
-    True,
-    False,
     Quote,
     If,
     Lambda,

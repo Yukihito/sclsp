@@ -4,7 +4,7 @@ import com.yukihitoho.sclsp.evaluator.EvaluationError.{InvalidNumberOfArguments,
 import com.yukihitoho.sclsp.evaluator._
 
 object Begin extends VariableFactory {
-  private val variable = BuiltinVariable("begin", new SpecialFormValue {
+  private val variable = BuiltinVariable(new SpecialFormValue {
     override def call(pair: PairValue, environment: Environment, evaluator: Evaluator): Either[EvaluationError, Value] =
       for {
         result <- pair match {
@@ -17,6 +17,8 @@ object Begin extends VariableFactory {
           case _ => Left(InvalidSyntax(pair, evaluator.stackTrace.toList))
         }
       } yield result
+
+    override def builtinSymbol: String = "begin"
   })
 
   private def evaluateValues(

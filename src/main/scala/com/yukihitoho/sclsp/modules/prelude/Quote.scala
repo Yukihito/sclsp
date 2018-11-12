@@ -4,7 +4,7 @@ import com.yukihitoho.sclsp.evaluator.EvaluationError.InvalidSyntax
 import com.yukihitoho.sclsp.evaluator._
 
 object Quote extends VariableFactory {
-  private val variable = BuiltinVariable("quote", new SpecialFormValue {
+  private val variable = BuiltinVariable(new SpecialFormValue {
     override def call(pair: PairValue, environment: Environment, evaluator: Evaluator): Either[EvaluationError, Value] =
       for {
         value <- pair match {
@@ -12,6 +12,8 @@ object Quote extends VariableFactory {
           case _ => Left(InvalidSyntax(pair, evaluator.stackTrace.toList))
         }
       } yield value
+
+    override def builtinSymbol: String = "quote"
   })
 
   override def create(): Variable = variable

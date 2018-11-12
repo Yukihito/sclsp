@@ -4,7 +4,7 @@ import com.yukihitoho.sclsp.evaluator.EvaluationError.{InvalidArgumentType, Inva
 import com.yukihitoho.sclsp.evaluator._
 
 object If extends VariableFactory {
-  private val variable = BuiltinVariable("if", new SpecialFormValue {
+  private val variable = BuiltinVariable(new SpecialFormValue {
     override def call(pair: PairValue, environment: Environment, evaluator: Evaluator): Either[EvaluationError, Value] =
       for {
         result <- pair match {
@@ -24,6 +24,8 @@ object If extends VariableFactory {
           case _ => Left(InvalidSyntax(pair, evaluator.stackTrace.toList))
         }
       } yield result
+
+    override def builtinSymbol: String = "if"
   })
 
   override def create(): Variable = variable

@@ -7,6 +7,10 @@ sealed trait Value {
   def valueEquals(other: Value): Boolean = this == other
 }
 
+trait Builtin extends Value {
+  def builtinSymbol: String
+}
+
 trait AtomValue extends Value
 
 case class StringValue(value: String) extends AtomValue
@@ -60,14 +64,14 @@ case class CompoundProcedureValue(
     }
 }
 
-trait PrimitiveProcedureValue extends ProcedureValue {
+trait PrimitiveProcedureValue extends ProcedureValue with Builtin {
   override protected def call(arguments: List[Value], environment: Environment, evaluator: Evaluator): Either[EvaluationError, Value] =
     call(arguments, evaluator.stackTrace)
 
   protected def call(arguments: List[Value], stackTrace: StackTrace): Either[EvaluationError, Value]
 }
 
-trait SpecialFormValue extends CallableValue
+trait SpecialFormValue extends CallableValue with Builtin
 
 case class PairValue(car: Value, cdr: Value, position: Option[Position]) extends Value {
   override def valueEquals(other: Value): Boolean = other match {

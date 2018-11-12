@@ -32,6 +32,8 @@ trait Evaluator {
     case StringLiteral(value, _) => StringValue(value)
     case NumberLiteral(value, _) => NumberValue(value)
     case Symbol("#nil", _) => NilValue
+    case Symbol("#t", _) => BooleanValue(true)
+    case Symbol("#f", _) => BooleanValue(false)
     case Symbol(value, position) => SymbolValue(value, position)
     case NodePair(car, cdr, position) => PairValue(nodeToValue(car), nodeToValue(cdr), Some(position))
   }

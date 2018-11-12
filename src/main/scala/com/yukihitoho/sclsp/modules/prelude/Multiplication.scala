@@ -3,8 +3,10 @@ package com.yukihitoho.sclsp.modules.prelude
 import com.yukihitoho.sclsp.evaluator._
 
 object Multiplication extends VariableFactory {
-  private val variable = BuiltinVariable("*", new ArithmeticOperatorValue {
+  private val variable = BuiltinVariable(new ArithmeticOperatorValue {
     override protected def calc(x: Double, y: Double): Double = x * y
+
+    override def builtinSymbol: String = "*"
   })
 
   override def create(): Variable = variable

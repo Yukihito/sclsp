@@ -9,7 +9,9 @@ case class UserDefinedVariable(symbol: SymbolValue, value: Value) extends Variab
   override def name: String = symbol.value
 }
 
-case class BuiltinVariable(name: String, value: Value) extends Variable
+case class BuiltinVariable(value: Value with Builtin) extends Variable {
+  override def name: String = value.builtinSymbol
+}
 
 trait VariablesRepository {
   def find(symbol: SymbolValue): Option[Variable]
