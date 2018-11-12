@@ -7,11 +7,11 @@ import org.scalatest._
 
 class `Eq?OperatorSpec` extends FlatSpec with Matchers {
   "The eq? operator" should "return the equivalence of arguments" in new WithInterpreter {
-    interpreter.interpret("(eq? 1 1") should be (Right(BooleanValue(true)))
-    interpreter.interpret("(eq? 1 2") should be (Right(BooleanValue(false)))
-    interpreter.interpret("(eq? #t #t") should be (Right(BooleanValue(true)))
-    interpreter.interpret("(eq? #f #f") should be (Right(BooleanValue(true)))
-    interpreter.interpret("(eq? #t #f") should be (Right(BooleanValue(false)))
+    interpreter.interpret("(eq? 1 1)") should be (Right(BooleanValue(true)))
+    interpreter.interpret("(eq? 1 2)") should be (Right(BooleanValue(false)))
+    interpreter.interpret("(eq? #t #t)") should be (Right(BooleanValue(true)))
+    interpreter.interpret("(eq? #f #f)") should be (Right(BooleanValue(true)))
+    interpreter.interpret("(eq? #t #f)") should be (Right(BooleanValue(false)))
     interpreter.interpret("""(eq? "hoge" "hoge")""") should be (Right(BooleanValue(true)))
     interpreter.interpret("""(eq? "hoge" "fuga")""") should be (Right(BooleanValue(false)))
     interpreter.interpret("""(eq? 1 "1")""") should be (Right(BooleanValue(false)))
