@@ -24,7 +24,7 @@ trait Evaluator {
           callable.call(pair, environment, this)
         }
         case _ =>
-          Left(InvalidProcedureCall(pair, stackTrace.toList))
+          Left(InvalidProcedureCall(pair, operator, stackTrace.toList))
       }
     } yield result
 

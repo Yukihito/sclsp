@@ -1,7 +1,7 @@
 package com.yukihitoho.sclsp.evaluator
 
 import com.yukihitoho.sclsp.ast.Position
-import com.yukihitoho.sclsp.evaluator.EvaluationError.{InvalidNumberOfArguments, InvalidProcedureCall}
+import com.yukihitoho.sclsp.evaluator.EvaluationError.{InvalidNumberOfArguments, InvalidSyntax}
 
 sealed trait Value {
   def valueEquals(other: Value): Boolean = this == other
@@ -35,15 +35,15 @@ sealed trait CallableValue extends AtomValue {
 trait ProcedureValue extends CallableValue {
   override def call(pair: PairValue, environment: Environment, evaluator: Evaluator): Either[EvaluationError, Value] =
     for {
-      pairs <- pair.toList.toRight(InvalidProcedureCall(pair, evaluator.stackTrace.toList))
-      arguments <- evaluateList(pairs, environment, evaluator)
+      values <- pair.toList.toRight(InvalidSyntax(pair, evaluator.stackTrace.toList))
+      arguments <- evaluateList(values.tail, environment, evaluator)
       result <- call(arguments, environment, evaluator)
     } yield result
 
   protected def call(arguments: List[Value], environment: Environment, evaluator: Evaluator): Either[EvaluationError, Value]
 
-  private def evaluateList(pairs: List[Value], environment: Environment, evaluator: Evaluator): Either[EvaluationError, List[Value]] =
-    pairs.tail.foldLeft[Either[EvaluationError, List[Value]]](Right(List())) {
+  private def evaluateList(values: List[Value], environment: Environment, evaluator: Evaluator): Either[EvaluationError, List[Value]] =
+    values.foldLeft[Either[EvaluationError, List[Value]]](Right(List())) {
       case (Right(acc), n) => evaluator.evaluate(n, environment).right.map(_ :: acc)
       case (Left(e), _) => Left(e)
     }.right.map(_.reverse)
