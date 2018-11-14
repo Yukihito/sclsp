@@ -16,7 +16,10 @@ trait Parser extends JavaTokenParsers {
   private def dotted: Parser[NodePair] = positioned("(" ~> elem ~ "." ~ elem <~ ")" ^^ { case car ~ "." ~ cdr => NodePair(car, cdr) })
 
   private def atom: Parser[Node] = positioned(
-    stringLiteral ^^ (s => StringLiteral(s.slice(1, s.length - 1)))
+        "#nil" ^^ (_ => NilLiteral)
+      | "#t" ^^ (_ => BooleanLiteral(true))
+      | "#f" ^^ (_ => BooleanLiteral(false))
+      |  stringLiteral ^^ (s => StringLiteral(s.slice(1, s.length - 1)))
       | floatingPointNumber ^^ (v => NumberLiteral(v.toDouble))
       | symbol ^^ (v => Symbol(v))
   )

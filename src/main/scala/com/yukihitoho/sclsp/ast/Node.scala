@@ -12,4 +12,8 @@ case class StringLiteral(value: String, position: Position) extends Node
 
 case class NumberLiteral(value: Double, position: Position) extends Node
 
+case class BooleanLiteral(value: Boolean, position: Position) extends Node
+
+case class NilLiteral(position: Position) extends Node
+
 case class Position(line: Int, column: Int, fileName: String)

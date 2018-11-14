@@ -1,6 +1,6 @@
 package com.yukihitoho.sclsp.evaluator
 
-import com.yukihitoho.sclsp.ast.{Node, NodePair, NumberLiteral, StringLiteral, Symbol}
+import com.yukihitoho.sclsp.ast._
 
 trait Evaluator {
   import EvaluationError._
@@ -31,9 +31,8 @@ trait Evaluator {
   private def nodeToValue(node: Node): Value = node match {
     case StringLiteral(value, _) => StringValue(value)
     case NumberLiteral(value, _) => NumberValue(value)
-    case Symbol("#nil", _) => NilValue
-    case Symbol("#t", _) => BooleanValue(true)
-    case Symbol("#f", _) => BooleanValue(false)
+    case NilLiteral(_) => NilValue
+    case BooleanLiteral(value, _) => BooleanValue(value)
     case Symbol(value, position) => SymbolValue(value, position)
     case NodePair(car, cdr, position) => PairValue(nodeToValue(car), nodeToValue(cdr), Some(position))
   }
