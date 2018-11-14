@@ -11,28 +11,28 @@ import com.yukihitoho.sclsp.ast.{
 import scala.util.parsing.input.Positional
 
 trait Node extends Positional {
-  def toAST: ASTNode
+  def toAST(fileName: String): ASTNode
 }
 
-case class NodeList(children: List[Node], fileName: String) extends Node {
-  override def toAST: ASTNode =
+case class NodeList(children: List[Node]) extends Node {
+  override def toAST(fileName: String): ASTNode =
     children.foldRight[ASTNode](ASTSymbol("#nil", Position(pos.line, pos.column, fileName))) {(car, cdr) =>
-      ASTNodePair(car.toAST, cdr, Position(pos.line, pos.column, fileName))
+      ASTNodePair(car.toAST(fileName), cdr, Position(pos.line, pos.column, fileName))
     }
 }
 
-case class NodePair(car: Node, cdr: Node, fileName: String) extends Node {
-  override def toAST: ASTNode = ASTNodePair(car.toAST, cdr.toAST, Position(pos.line, pos.column, fileName))
+case class NodePair(car: Node, cdr: Node) extends Node {
+  override def toAST(fileName: String): ASTNode = ASTNodePair(car.toAST(fileName), cdr.toAST(fileName), Position(pos.line, pos.column, fileName))
 }
 
-case class Symbol(value: String, fileName: String) extends Node {
-  override def toAST: ASTNode = ASTSymbol(value, Position(pos.line, pos.column, fileName))
+case class Symbol(value: String) extends Node {
+  override def toAST(fileName: String): ASTNode = ASTSymbol(value, Position(pos.line, pos.column, fileName))
 }
 
-case class StringLiteral(value: String, fileName: String) extends Node {
-  override def toAST: ASTNode = ASTStringLiteral(value, Position(pos.line, pos.column, fileName))
+case class StringLiteral(value: String) extends Node {
+  override def toAST(fileName: String): ASTNode = ASTStringLiteral(value, Position(pos.line, pos.column, fileName))
 }
 
-case class NumberLiteral(value: Double, fileName: String) extends Node {
-  override def toAST: ASTNode = ASTNumberLiteral(value, Position(pos.line, pos.column, fileName))
+case class NumberLiteral(value: Double) extends Node {
+  override def toAST(fileName: String): ASTNode = ASTNumberLiteral(value, Position(pos.line, pos.column, fileName))
 }

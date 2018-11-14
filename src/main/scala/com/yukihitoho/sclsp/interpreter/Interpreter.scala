@@ -15,7 +15,7 @@ trait Interpreter {
 
   def interpret(src: String, fileName: String): Either[InterpretationError, Value] =
     for {
-      ast <- parser.parseToNode(src, fileName: String).right.map(_.toAST).left.map(ParsingError)
+      ast <- parser.parseToNode(src, fileName: String).right.map(_.toAST(fileName)).left.map(ParsingError)
       value <- evaluator.evaluate(ast, environment).left.map(EvaluationError)
     } yield value
 }
