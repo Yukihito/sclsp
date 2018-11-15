@@ -8,7 +8,7 @@ object Lambda extends VariableFactory {
     override def call(pair: PairValue, environment: Environment, evaluator: Evaluator): Either[EvaluationError, Value] =
       for {
         result <- pair match {
-          case PairValue(SymbolValue("lambda", position), PairValue(paramsPair: PairValue, PairValue(body, NilValue, _), _), _) =>
+          case PairValue(SymbolValue(_, position), PairValue(paramsPair: PairValue, PairValue(body, NilValue, _), _), _) =>
             for {
               params <- collectParams(paramsPair, evaluator.stackTrace)
             } yield CompoundProcedureValue(params, body, environment, position)
