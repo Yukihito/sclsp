@@ -11,7 +11,7 @@ trait Evaluator {
 
   def evaluate(value: Value, environment: Environment): Either[EvaluationError, Value] =
     value match {
-      case symbol: SymbolValue => environment.find(symbol).map(_.value).toRight(UnboundVariable(symbol, stackTrace.toList))
+      case symbol: SymbolValue => environment.find(symbol.value).map(_.value).toRight(UnboundVariable(symbol, stackTrace.toList))
       case pair: PairValue => call(pair, environment)
       case v => Right(v)
     }

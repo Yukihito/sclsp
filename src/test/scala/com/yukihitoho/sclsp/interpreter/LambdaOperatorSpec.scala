@@ -31,8 +31,8 @@ class LambdaOperatorSpec extends FlatSpec with Matchers {
         |  (define factorial
         |    (lambda (n)
         |      (if (eq? n 1)
-        |	       1
-        |	       (* n (factorial (- n 1))))))
+        |        1
+        |        (* n (factorial (- n 1))))))
         |  (factorial 5))
       """.stripMargin
     interpreter.interpret(src) should be (Right(NumberValue(120)))

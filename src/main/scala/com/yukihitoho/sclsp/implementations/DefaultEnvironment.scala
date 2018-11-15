@@ -17,7 +17,7 @@ object DefaultEnvironmentFactory extends EnvironmentFactory {
 class DefaultVariablesRepository extends VariablesRepository {
   private val nameToVariables = new mutable.HashMap[String, Variable]
 
-  override def find(symbol: SymbolValue): Option[Variable] = nameToVariables.get(symbol.value)
+  override def find(name: String): Option[Variable] = nameToVariables.get(name)
 
   override def store(variable: Variable): Unit = nameToVariables(variable.name) = variable
 }

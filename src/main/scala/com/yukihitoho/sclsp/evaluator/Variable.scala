@@ -14,7 +14,7 @@ case class BuiltinVariable(value: Value with Builtin) extends Variable {
 }
 
 trait VariablesRepository {
-  def find(symbol: SymbolValue): Option[Variable]
+  def find(name: String): Option[Variable]
 
   def store(variable: Variable): Unit
 }

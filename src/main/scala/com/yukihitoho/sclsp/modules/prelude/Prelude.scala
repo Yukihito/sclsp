@@ -8,6 +8,7 @@ object Prelude extends Module {
     If,
     Lambda,
     Define,
+    `Set!`,
     Begin,
     Addition,
     Subtraction,
