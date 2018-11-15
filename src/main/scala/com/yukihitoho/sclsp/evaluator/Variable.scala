@@ -13,6 +13,11 @@ case class BuiltinVariable(value: Value with Builtin) extends Variable {
   override def name: String = value.builtinSymbol
 }
 
+case class SynonymVariable(synonym: String, underlying: Variable) extends Variable {
+  override def name: String = synonym
+  override def value: Value = underlying.value
+}
+
 trait VariablesRepository {
   def find(name: String): Option[Variable]
 
