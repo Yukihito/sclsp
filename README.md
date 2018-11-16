@@ -91,4 +91,4 @@ Right(NumberValue(120.0))
 A simple sample code about this section is [here](https://github.com/Yukihito/sclsp-samples/blob/master/src/main/scala/com/yukihitoho/sclspsamples/simpleusage/Main.scala).
 
 
-If you needs more examples, check [Specs](https://github.com/Yukihito/sclsp/tree/master/src/test/scala/com/yukihitoho/sclsp/interpreter) or [Sample codes](https://github.com/Yukihito/sclsp-samples). 
+If you need more examples, check [Specs](https://github.com/Yukihito/sclsp/tree/master/src/test/scala/com/yukihitoho/sclsp/interpreter) or [Sample codes](https://github.com/Yukihito/sclsp-samples). 
