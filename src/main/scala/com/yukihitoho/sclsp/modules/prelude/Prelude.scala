@@ -28,6 +28,8 @@ object Prelude extends Module {
     Car,
     Cdr,
     Cons,
+    ListOp,
+    While,
     Print,
     Exit
   )

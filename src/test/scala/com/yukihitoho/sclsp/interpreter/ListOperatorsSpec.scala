@@ -47,4 +47,15 @@ class ListOperatorsSpec extends FlatSpec with Matchers {
       case Left(EvaluationError(InvalidNumberOfArguments(1, 2, false, _))) =>
     }
   }
+
+  "The list operator" should "construct a list" in new WithInterpreter {
+    val src: String =
+      """
+        |(begin
+        |  (define x 1)
+        |  (list x 2 3))
+      """.stripMargin
+
+    interpreter.interpret(src).right.map(_.asInstanceOf[PairValue].toList.get) should be (Right(List(NumberValue(1), NumberValue(2), NumberValue(3))))
+  }
 }
