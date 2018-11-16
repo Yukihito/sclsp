@@ -7,9 +7,9 @@ trait BinaryOperatorValue extends PrimitiveProcedureValue {
   override protected def call(arguments: List[Value], stackTrace: StackTrace): Either[EvaluationError, Value] =
     for {
       _ <- Either.cond(arguments.length == 2, (), InvalidNumberOfArguments(2, arguments.length, variadic = false, stackTrace.toList))
-      value <- call(arguments.head, arguments(1))
+      value <- call(arguments.head, arguments(1), stackTrace)
     } yield value
 
-  protected def call(x: Value, y: Value): Either[EvaluationError, Value]
+  protected def call(x: Value, y: Value, stackTrace: StackTrace): Either[EvaluationError, Value]
 }
 
