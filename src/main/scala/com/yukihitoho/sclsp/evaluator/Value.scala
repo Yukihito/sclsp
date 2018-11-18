@@ -60,7 +60,7 @@ case class CompoundProcedureValue(
       Left(InvalidNumberOfArguments(parameters.length, arguments.length, variadic = false, evaluator.stackTrace.toList))
     } else {
       val variables = parameters.zip(arguments).map { case (param, arg) => UserDefinedVariable(param, arg) }
-      evaluator.evaluate(body, environment.extend(variables))
+      evaluator.evaluate(body, this.environment.extend(variables))
     }
 }
 

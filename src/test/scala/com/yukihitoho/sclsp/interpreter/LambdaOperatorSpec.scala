@@ -1,6 +1,6 @@
 package com.yukihitoho.sclsp.interpreter
 
-import com.yukihitoho.sclsp.evaluator.{NumberValue, PairValue}
+import com.yukihitoho.sclsp.evaluator.{NilValue, NumberValue, PairValue, StringValue}
 import org.scalatest._
 
 class LambdaOperatorSpec extends FlatSpec with Matchers {
@@ -22,6 +22,25 @@ class LambdaOperatorSpec extends FlatSpec with Matchers {
     """.stripMargin
     interpreter.interpret(src).right.map(_.asInstanceOf[PairValue].toList.get) should be (
       Right(List(NumberValue(1), NumberValue(2), NumberValue(3), NumberValue(4))))
+  }
+
+  it should "make a nested lexical closure" in new WithInterpreter {
+    val src: String =
+      """
+        |(begin
+        | (define ChatApp (lambda ()
+        |   (begin
+        |     (define messages ())
+        |     (lambda (command comment)
+        |       (if (eq? command "chat")
+        |         (set! messages (cons comment messages))
+        |         messages)))))
+        |  (define app (ChatApp))
+        |  (app "chat" "hello!")
+        |  (app "show" #nil)
+        |)
+      """.stripMargin
+    interpreter.interpret(src) should be (Right(PairValue(StringValue("hello!"), NilValue, None)))
   }
 
   it should "be able to construct recursive function" in new WithInterpreter {

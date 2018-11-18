@@ -18,12 +18,10 @@ trait Environment {
   }
 
   def find(name: String): Option[Variable] =
-    variables.find(name).fold {
-      for {
-        base <- base
-        variable <- base.find(name)
-      } yield variable
-    }(Some(_))
+    variables.find(name) match {
+      case Some(variable) => Some(variable)
+      case None => base.flatMap(b => b.find(name))
+    }
 
   def define(variable: Variable): Environment = {
     variables.store(variable)
