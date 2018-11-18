@@ -37,7 +37,8 @@ The Lisp interpreter that can be embedded within a scala application.
     - while
 
     </details>
-- Lexical closure.     
+- Can replace the default data store for variables with your owns.    
+- Lexical closure.
 - If interpretation is stopped by an error, the result object provides reason, stack trace, and position in code.  
 
 # Usage
@@ -47,6 +48,7 @@ The Lisp interpreter that can be embedded within a scala application.
     - A simple example of embedding sclsp in a scala application.
     - A sample of REPL implementation.
     - Implementing a JavaScript subset by replace the default sclsp parser with the JavaScript parser.
+    - An example of an implementation of sharing variables with remote process.
 
 # Getting started
 ## Adding dependency in your project
