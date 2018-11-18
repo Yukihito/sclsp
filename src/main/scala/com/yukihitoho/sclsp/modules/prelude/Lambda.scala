@@ -12,6 +12,8 @@ object Lambda extends VariableFactory {
             for {
               params <- collectParams(paramsPair, evaluator.stackTrace)
             } yield CompoundProcedureValue(params, body, environment, position)
+          case PairValue(SymbolValue(_, position), PairValue(NilValue, PairValue(body, NilValue, _), _), _) =>
+            Right(CompoundProcedureValue(Seq(), body, environment, position))
           case _ => Left(InvalidSyntax(pair, evaluator.stackTrace.toList))
         }
       } yield result

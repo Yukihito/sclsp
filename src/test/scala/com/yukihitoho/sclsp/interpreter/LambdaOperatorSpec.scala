@@ -37,5 +37,16 @@ class LambdaOperatorSpec extends FlatSpec with Matchers {
       """.stripMargin
     interpreter.interpret(src) should be (Right(NumberValue(120)))
   }
+
+  it should "be able to construct zero arity procedure" in new WithInterpreter {
+    val src: String =
+      """
+        |(begin
+        |  (define f (lambda () 1))
+        |  (f))
+      """.stripMargin
+
+    interpreter.interpret(src) should be (Right(NumberValue(1)))
+  }
   // scalastyle:on
 }
