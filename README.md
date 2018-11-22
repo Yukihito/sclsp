@@ -3,7 +3,7 @@ The Lisp interpreter that can be embedded within a scala application.
     
 # Features
 - Can replace the default parser with your owns.
-- Can add your own operators that is implemented by scala on the interpreter.
+- Can add your own operators that are implemented by scala on the interpreter.
   - By default, available operators are in below.
   <details><summary>CLICK HERE TO EXPAND</summary>
 
